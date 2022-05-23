@@ -1,16 +1,14 @@
-# This is a sample Python script.
+# Create a list
+my_list = ["jody", "boby", "bill"]
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Print some values from list
+print(my_list[0])
 
+# Create a dictionary
+inventory = {"weapon": "sword",
+             "armor": "leather",
+             "item": "potion"}
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Print some stuff from dictionary
+print(inventory["weapon"])
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
