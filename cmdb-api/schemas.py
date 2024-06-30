@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+# Users section
 class UserBase(BaseModel):
     username: str
     email: str
@@ -19,7 +20,7 @@ class UserOut(UserBase):
     class Config:
         orm_mode = True
 
-
+# Virtual machines section
 class VMBase(BaseModel):
     vm_name: str
     user_id: int
