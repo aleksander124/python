@@ -2,7 +2,7 @@
 rockyou.txt
 tekst.txt
 .env
-*/.env
+cmdb-api/app/.env
 
 __pycache__
 */__pychache__
