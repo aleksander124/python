@@ -1,7 +1,6 @@
 from typing import List
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from fastapi import FastAPI
 from database import SessionLocal
 from schemas import UserCreate, UserUpdate, UserOut, VMCreate, VMUpdate, VMOut
 from models import User, VirtualMachine
@@ -85,7 +84,8 @@ def update_vm(vm_name: str, vm: VMUpdate, db: Session = Depends(get_db)):
     if db_vm is None:
         raise HTTPException(status_code=404, detail="VM not found")
     for var, value in vars(vm).items():
-        setattr(db_vm, var, value) if value is not None else None
+        if value is not None:
+            setattr(db_vm, var, value)
     db.commit()
     db.refresh(db_vm)
     return db_vm
