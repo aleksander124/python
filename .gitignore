@@ -3,3 +3,6 @@ rockyou.txt
 tekst.txt
 .env
 */.env
+
+__pycache__
+*/__pychache__
