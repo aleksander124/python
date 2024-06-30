@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -117,6 +119,13 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+@app.get("/users/", response_model=List[UserOut])
+def read_users(db: Session = Depends(get_db)):
+    db_users = db.query(User).all()
+    if db_users is None:
+        raise HTTPException(status_code=404, detail="Users not found")
+    return db_users
+
 
 @app.put("/users/{user_id}", response_model=UserOut)
 def update_user(user_id: int, user: UserUpdate, db: Session = Depends(get_db)):
@@ -148,7 +157,6 @@ def create_vm(vm: VMCreate, db: Session = Depends(get_db)):
     db.refresh(db_vm)
     return db_vm
 
-
 @app.get("/virtualmachines/{vm_name}", response_model=VMOut)
 def read_vm(vm_name: str, db: Session = Depends(get_db)):
     db_vm = db.query(VirtualMachine).filter(VirtualMachine.vm_name == vm_name).first()
@@ -156,6 +164,12 @@ def read_vm(vm_name: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="VM not found")
     return db_vm
 
+@app.get("/virtualmachines/", response_model=List[VMOut])
+def read_vms(db: Session = Depends(get_db)):
+    db_vm = db.query(VirtualMachine).all()
+    if db_vm is None:
+        raise HTTPException(status_code=404, detail="VMs not found")
+    return db_vm
 
 @app.put("/virtualmachines/{vm_name}", response_model=VMOut)
 def update_vm(vm_name: str, vm: VMUpdate, db: Session = Depends(get_db)):
