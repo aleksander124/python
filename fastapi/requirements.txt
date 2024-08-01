@@ -1,8 +1,6 @@
 fastapi
 uvicorn
 sqlalchemy
-databases
-psycopg2-binary
 pydantic
-bcrypt
-python-jose
+mysql-connector-python
+python-dotenv
